@@ -1,0 +1,5 @@
+FROM postgres:16-alpine
+
+ENV POSTGRES_USER=techsolutio
+ENV POSTGRES_PASSWORD=techsolutio
+ENV POSTGRES_DB=techsolutio

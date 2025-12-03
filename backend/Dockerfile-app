@@ -1,0 +1,21 @@
+from python:3.13.3-alpine
+
+WORKDIR /app
+
+COPY supervisord.conf /etc/supervisord.conf
+COPY main.py .
+COPY usuario_worker.py .
+COPY produto_worker.py .
+COPY pyproject.toml .
+COPY settings.toml .
+COPY ./app ./app
+RUN pip install uv
+RUN uv pip install -r pyproject.toml --system
+RUN pip install supervisor
+
+ENV ENV_FOR_DYNACONF=homologation
+
+EXPOSE 8000
+
+CMD ["supervisord", "-c", "/etc/supervisord.conf"]
+
