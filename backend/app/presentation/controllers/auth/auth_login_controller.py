@@ -21,7 +21,7 @@ class AuthLoginController:
             
             auth_login_response = self.auth_login_use_case.login(auth_value_object=auth_value_object)
             
-            return HttpResponseValueObject(status_code=200, body={"data": DataclassAdapter().dataclass_to_dict(data=auth_login_response)})
+            return HttpResponseValueObject(status_code=200, body=DataclassAdapter().dataclass_to_dict(data=auth_login_response))
 
         except ErroDeValueObject as e:
             return HttpResponseValueObject(status_code=422, message=f"{e.args[0]}")

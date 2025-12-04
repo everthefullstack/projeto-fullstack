@@ -1,0 +1,22 @@
+<div>
+    <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
+        <div>
+            <label for="login">Usuário/Email:</label>
+            <input id="login" formControlName="login" type="text" />
+            <span *ngIf="loginFormGroup.get('login')?.invalid && loginFormGroup.get('login')?.touched">
+                Por favor, insira um usuário ou email válido.
+            </span>
+        </div>
+
+        <div>
+            <label for="senha">Senha:</label>
+            <input id="senha" formControlName="senha" type="password" />
+            <span *ngIf="loginFormGroup.get('senha')?.invalid && loginFormGroup.get('senha')?.touched">
+                A senha é obrigatória.
+            </span>
+        </div>
+
+        <button type="submit" [disabled]="!loginFormGroup.valid">Login</button>
+
+    </form>
+</div>

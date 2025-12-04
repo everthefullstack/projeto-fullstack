@@ -17,18 +17,18 @@ class RedisUsuarioRepository(QueueUsuarioRepositoryInterface):
         message = {"action": "insert", "data": usuario_dict}
         self.redis_client.lpush("usuarios_queue", json.dumps(message, default=str))
 
-        return True
+        return {"status": "queued"}
     
     def atualizar_usuario(self, usuario_entity: UsuarioEntity) -> UsuarioEntity:
         usuario_dict = self.usuario_adapter.dataclass_to_dict(data=usuario_entity)
         message = {"action": "update", "data": usuario_dict}
         self.redis_client.lpush("usuarios_queue", json.dumps(message, default=str))
 
-        return True
+        return {"status": "queued"}
     
     def deletar_usuario(self, usuario_id: str) -> None:
         message = {"action": "delete", "data": usuario_id}
         self.redis_client.lpush("usuarios_queue", json.dumps(message, default=str))
         
-        return True
+        return {"status": "queued"}
         

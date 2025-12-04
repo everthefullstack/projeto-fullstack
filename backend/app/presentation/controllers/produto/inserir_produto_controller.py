@@ -20,7 +20,7 @@ class InserirProdutoController:
             )
             
             produto_response = self.inserir_produto_use_case.inserir_produto(produto_entity=produto_entity)
-            return HttpResponseValueObject(status_code=202, body={"data": DataclassAdapter().dataclass_to_dict(data=produto_response)})
+            return HttpResponseValueObject(status_code=202, body=DataclassAdapter().dataclass_to_dict(data=produto_response))
     
         except Exception as e:
             return HttpResponseValueObject(status_code=500, body={"erro": str(e)})

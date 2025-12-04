@@ -17,18 +17,18 @@ class RedisProdutoRepository(QueueProdutoRepositoryInterface):
         message = {"action": "insert", "data": produto_dict}
         self.redis_client.lpush("produtos_queue", json.dumps(message, default=str))
 
-        return True
+        return {"status": "queued"}
     
     def atualizar_produto(self, produto_entity: ProdutoEntity) -> ProdutoEntity:
         produto_dict = self.produto_adapter.dataclass_to_dict(data=produto_entity)
         message = {"action": "update", "data": produto_dict}
         self.redis_client.lpush("produtos_queue", json.dumps(message, default=str))
 
-        return True
+        return {"status": "queued"}
     
     def deletar_produto(self, produto_id: str) -> None:
         message = {"action": "delete", "data": produto_id}
         self.redis_client.lpush("produtos_queue", json.dumps(message, default=str))
         
-        return True
+        return {"status": "queued"}
         

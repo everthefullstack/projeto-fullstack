@@ -21,7 +21,7 @@ class AtualizarProdutoController:
             )
             
             produto_response = self.atualizar_produto_use_case.atualizar_produto(produto_entity=produto_entity)
-            return HttpResponseValueObject(status_code=202, body={"data": DataclassAdapter().dataclass_to_dict(data=produto_response)})
+            return HttpResponseValueObject(status_code=202, body=DataclassAdapter().dataclass_to_dict(data=produto_response))
     
         except Exception as e:
             return HttpResponseValueObject(status_code=500, body={"erro": str(e)})

@@ -22,7 +22,7 @@ class InserirUsuarioController:
             
             usuario_response = self.inserir_usuario_use_case.inserir_usuario(usuario_entity=usuario_entity)
 
-            return HttpResponseValueObject(status_code=202, body={"data": DataclassAdapter().dataclass_to_dict(data=usuario_response)})
+            return HttpResponseValueObject(status_code=202, body=DataclassAdapter().dataclass_to_dict(data=usuario_response))
 
         except ErroDeDominio as e:
             return HttpResponseValueObject(status_code=422, message=f"{e.args[0]}")

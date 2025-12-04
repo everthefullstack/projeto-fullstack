@@ -16,7 +16,7 @@ class DeletarProdutoController:
             produto_id: str = http_request_value_object.path_params.get("id")
 
             produto_response = self.deletar_produto_use_case.deletar_produto(produto_id=produto_id)
-            return HttpResponseValueObject(status_code=202, body={"data": DataclassAdapter().dataclass_to_dict(data=produto_response)})
+            return HttpResponseValueObject(status_code=202, body=DataclassAdapter().dataclass_to_dict(data=produto_response))
     
         except Exception as e:
             return HttpResponseValueObject(status_code=500, body={"erro": str(e)})

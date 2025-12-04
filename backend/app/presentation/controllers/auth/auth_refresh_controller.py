@@ -17,7 +17,7 @@ class AuthRefreshController:
             refresh_token: str = http_request_value_object.headers.get("Authorization", "").replace("Bearer ", "")
             auth_refresh_response = self.auth_refresh_use_case.refresh(refresh_token=refresh_token)
             
-            return HttpResponseValueObject(status_code=200, body={"data": DataclassAdapter().dataclass_to_dict(data=auth_refresh_response)})
+            return HttpResponseValueObject(status_code=200, body=DataclassAdapter().dataclass_to_dict(data=auth_refresh_response))
 
         except ErroDeValueObject as e:
             return HttpResponseValueObject(status_code=422, message=f"{e.args[0]}")

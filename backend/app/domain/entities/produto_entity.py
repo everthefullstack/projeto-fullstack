@@ -27,10 +27,12 @@ class ProdutoEntity:
         if not isinstance(self.marca, str):
             raise TypeError("Marca do produto deve ser uma string.")
 
-    def validar_valor(self) -> None:
+    def validar_valor(self) -> None:        
+        if not isinstance(self.valor, float):
+            try:
+                self.valor = float(self.valor)
+            except ValueError:
+                raise TypeError("O valor do produto deve ser um número.")
+            
         if self.valor <= 0:
             raise ValueError("O valor do produto deve ser maior que zero.")
-        
-        if not isinstance(self.valor, float):
-            raise TypeError("O valor do produto deve ser um número.")
-    

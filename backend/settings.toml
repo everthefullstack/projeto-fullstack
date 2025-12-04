@@ -1,11 +1,22 @@
 [default]
     ALLOWED_ORIGINS = [
-        "http://localhost:8000",
-        "http://127.0.0.1:8000"
+        "http://127.0.0.1:4200", 
+        "http://localhost:4200",
+        "http://127.0.0.1:8000", 
+        "http://localhost:8000"
+    ]
+    ALLOWED_METHODS = [
+        "GET", 
+        "POST", 
+        "PUT", 
+        "DELETE", 
+        "OPTIONS"
+    ]
+    ALLOWED_HEADERS = [
+        "Content-Type", 
+        "Authorization"
     ]
     ALLOWED_CREDENTIALS = true
-    ALLOWED_METHODS = ["*"]
-    ALLOWED_HEADERS = ["*"]
     DEBUG = false
     SECRET_KEY = "Techsolutio@2025##"
     ALGORITHM = "HS256"

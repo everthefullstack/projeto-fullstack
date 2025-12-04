@@ -12,7 +12,7 @@ class SelecionarProdutosController:
     def selecionar_produtos(self) -> HttpResponseValueObject:
         try:
             produto_response = self.selecionar_produtos_use_case.selecionar_produtos()
-            return HttpResponseValueObject(status_code=200, body={"data": DataclassAdapter().dataclass_to_dict(data=produto_response)})
+            return HttpResponseValueObject(status_code=200, body=DataclassAdapter().dataclass_to_dict(data=produto_response))
     
         except Exception as e:
             return HttpResponseValueObject(status_code=500, body={"erro": str(e)})
