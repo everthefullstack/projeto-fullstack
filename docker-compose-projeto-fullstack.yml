@@ -38,6 +38,21 @@ services:
     networks:
       - projeto-fullstack
 
+  frontend-projeto-fullstack:
+    container_name: frontend_projeto_fullstack
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile-angular
+    restart: unless-stopped
+    ports:
+      - "4200:80"
+    networks:
+      - projeto-fullstack
+    depends_on:
+      - db-projeto-fullstack
+      - redis-projeto-fullstack
+      - app-projeto-fullstack
+
 volumes:
   db-projeto-fullstack:
     driver: local
