@@ -13,7 +13,7 @@ export class RouteGuard implements CanActivate {
       return true;
 
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login'], { queryParams: { msg: 'Você precisa estar logado' } });
       return false;
     }
   }

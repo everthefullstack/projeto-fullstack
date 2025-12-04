@@ -1,44 +1,49 @@
-<h2>Logout</h2>
-<button type="button" id="logout-button" (click)="logout()">Logout</button>
+<div class="container">
+  <h2>Logout</h2>
+  <button class="btn btn-primary" type="button" id="logout-button" (click)="logout()">Logout</button>
 
-<hr />
+  <hr />
 
-<h2>Cadastro de Produto</h2>
-<form [formGroup]="produtoForm" (ngSubmit)="onSubmit()" class="produto-form">
-  <div>
-    <label for="nome">Nome:</label>
-    <input id="nome" type="text" formControlName="nome" />
-  </div>
+  <h2>Cadastro de Produto</h2>
+  <form [formGroup]="produtoForm" (ngSubmit)="onSubmit()" class="produto-form">
+    <div class="col-4">
+      <div class="mb-3">
+        <label for="nome" class="form-label">Nome:</label>
+        <input class="form-control" id="nome" type="text" formControlName="nome" />
+      </div>
 
-  <div>
-    <label for="marca">Marca:</label>
-    <input id="marca" type="text" formControlName="marca" />
-  </div>
+      <div class="mb-3">
+        <label for="marca" class="form-label">Marca:</label>
+        <input class="form-control" id="marca" type="text" formControlName="marca" />
+      </div>
 
-  <div>
-    <label for="valor">Valor:</label>
-    <input id="valor" type="number" step="0.01" formControlName="valor" />
-  </div>
+      <div class="mb-3">
+        <label for="valor" class="form-label">Valor:</label>
+        <input class="form-control" id="valor" type="number" step="0.01" formControlName="valor" />
+      </div>
+    </div>
 
-  <br>
-  <div>
-    <button type="submit" [disabled]="produtoForm.invalid">
-      {{ produtoEditando ? 'Atualizar' : 'Salvar' }}
-    </button>
-    @if (produtoEditando) {
-      <button type="button" (click)="cancelarEdicao()">Cancelar</button>
-    }
-  </div>
-</form>
+    <br>
 
-<hr />
+    <div>
+      <button class="btn btn-primary" type="submit" [disabled]="produtoForm.invalid">
+        {{ produtoEditando ? 'Atualizar' : 'Salvar' }}
+      </button>
+      @if (produtoEditando) {
+      <button class="btn btn-danger" type="button" (click)="cancelarEdicao()">Cancelar</button>
+      }
+    </div>
+  </form>
 
-<h2>Lista de Produtos</h2>
+  <hr />
 
-@if (produtos) {
-  <table class="produtos-tabela">
+  <h2>Lista de Produtos</h2>
+
+  @if (produtos) {
+  <table class="table produtos-tabela">
     <thead>
       <tr>
+        <th scope="col">#</th>
         <th>Nome</th>
         <th>Marca</th>
         <th>Valor</th>
@@ -48,20 +53,22 @@
     </thead>
     <tbody>
       @for (produto of produtos; track produto.id) {
-        <tr>
-          <td>{{ produto.nome }}</td>
-          <td>{{ produto.marca }}</td>
-          <td>{{ produto.valor | currency:'BRL':'symbol':'1.2-2' }}</td>
-          <td>
-            <button type="button" (click)="editarProduto(produto)">Editar</button>
-          </td>
-          <td>
-            <button type="button" (click)="deletarProduto(produto.id)">Deletar</button>
-          </td>
-        </tr>
+      <tr>
+        <th scope="col">#</th>
+        <td>{{ produto.nome }}</td>
+        <td>{{ produto.marca }}</td>
+        <td>{{ produto.valor | currency:'BRL':'symbol':'1.2-2' }}</td>
+        <td>
+          <button class="btn btn-warning" type="button" (click)="editarProduto(produto)">Editar</button>
+        </td>
+        <td>
+          <button class="btn btn-danger" type="button" (click)="deletarProduto(produto.id)">Deletar</button>
+        </td>
+      </tr>
       }
     </tbody>
   </table>
-} @else {
+  } @else {
   <p>Nenhum produto encontrado.</p>
-}
+  }
+</div>

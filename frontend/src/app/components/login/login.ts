@@ -18,7 +18,14 @@ export class Login {
     login: new FormControl('', Validators.required),
     senha: new FormControl('', Validators.required),
   });
-  
+  mensagem: string | null = null;
+
+  ngOnInit(): void {
+    this.router.routerState.root.queryParams.subscribe(params => {
+      this.mensagem = params['msg'] || null;
+    });
+  }
+
   onSubmit() {
     if (this.loginFormGroup.valid) {
 

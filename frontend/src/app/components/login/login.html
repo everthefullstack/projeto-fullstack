@@ -1,22 +1,31 @@
-<div>
+<div class="container">
+    <div *ngIf="mensagem" class="alert alert-warning">
+        {{ mensagem }}
+    </div>
+
     <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
-        <div>
-            <label for="login">Usuário/Email:</label>
-            <input id="login" formControlName="login" type="text" />
-            <span *ngIf="loginFormGroup.get('login')?.invalid && loginFormGroup.get('login')?.touched">
-                Por favor, insira um usuário ou email válido.
-            </span>
+        <div class="row g-3 align-items-center">
+            <div class="col-auto">
+                <label for="login" class="col-form-label">Usuário/Email</label>
+                <input class="form-control" id="login" formControlName="login" type="text">
+                <span *ngIf="loginFormGroup.get('login')?.invalid && loginFormGroup.get('login')?.touched">
+                    Por favor, insira um usuário ou email válido.
+                </span>
+            </div>
+
+            <div class="col-auto">
+                <label for="senha" class="col-form-label">Senha:</label>
+                <input class="form-control" id="senha" formControlName="senha" type="password" />
+                <span *ngIf="loginFormGroup.get('senha')?.invalid && loginFormGroup.get('senha')?.touched">
+                    A senha é obrigatória.
+                </span>
+            </div>
+            
         </div>
-
-        <div>
-            <label for="senha">Senha:</label>
-            <input id="senha" formControlName="senha" type="password" />
-            <span *ngIf="loginFormGroup.get('senha')?.invalid && loginFormGroup.get('senha')?.touched">
-                A senha é obrigatória.
-            </span>
+        <div class="row g-3 align-items-center mt-3">
+            <div class="col-auto">
+                <button class="btn btn-primary" type="submit" [disabled]="loginFormGroup.invalid">Entrar</button>
+            </div>
         </div>
-
-        <button type="submit" [disabled]="!loginFormGroup.valid">Login</button>
-
     </form>
 </div>

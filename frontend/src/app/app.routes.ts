@@ -5,7 +5,13 @@ import { RouteGuard } from './route_guard/route_guard';
 
 
 export const routes: Routes = [
-    { path: "", component: Login},
-    { path: "login", component: Login },
-    { path: "produto", component: Produto, canActivate: [RouteGuard] },
+    { 
+        path: "", component: Login
+    },
+    { 
+        path: "login", component: Login 
+    },
+    { 
+        path: "produto", component: Produto, canActivate: [RouteGuard] 
+    },
 ];
