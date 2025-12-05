@@ -9,3 +9,5 @@ class SelecionarProdutosErro(Exception): pass
 class AtualizarProdutoErro(Exception): pass
 
 class DeletarProdutoErro(Exception): pass
+
+class CredenciaisInvalidasErro(Exception): pass

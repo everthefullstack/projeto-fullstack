@@ -11,7 +11,7 @@ export const Interceptor: HttpInterceptorFn = (req, next) => {
   return next(req).pipe(
     catchError((error) => {
       if (error.status === 401) {
-        router.navigate(['/login'], { queryParams: { msg: 'Sua sessão expirou. Por favor, faça login novamente.' } });
+        router.navigate(['/login'], { queryParams: { msg: error.error.message } });
       } else if (error.status === 403) {
         router.navigate(['/login'], { queryParams: { msg: 'Você não tem permissão para acessar este recurso.' } });
       }

@@ -3,6 +3,7 @@ from app.application.interfaces.auth.auth_use_case_interface import AuthLoginUse
 from app.application.interfaces.geral.token_manager_interface import TokenManagerInterface
 from app.application.interfaces.geral.unit_of_work_interface import UnitOfWorkInterface
 from app.application.interfaces.geral.password_manager_interface import PasswordManagerInterface
+from app.domain.erros.erros import CredenciaisInvalidasErro
 from app.domain.value_objects.auth_value_object import AuthValueObject
 from app.domain.value_objects.token_value_object import TokenValueObject
 
@@ -18,7 +19,7 @@ class AuthLoginUseCase(AuthLoginUseCaseInterface):
 
             auth_value_object.validar_login()
             auth_value_object.validar_senha()
-            
+
             usuario_response = None
 
             if auth_value_object.login.isalnum():
@@ -31,10 +32,18 @@ class AuthLoginUseCase(AuthLoginUseCaseInterface):
                     auth_value_object.login
                 )
 
-            if self.password_manager.verify(usuario_response.senha, auth_value_object.senha):
-                token_value_object = TokenValueObject(access_token=self.token_manager.create_access_token(data=usuario_response),
-                                                      refresh_token=self.token_manager.create_refresh_token(data=usuario_response))
-                
-                return token_value_object
-        
+            if not usuario_response:
+                raise CredenciaisInvalidasErro("Usuário ou senha inválidos.")
+
+            if not self.password_manager.verify(usuario_response.senha, auth_value_object.senha):
+                raise CredenciaisInvalidasErro("Usuário ou senha inválidos.")
+
+            token_value_object = TokenValueObject(
+                access_token=self.token_manager.create_access_token(data=usuario_response),
+                refresh_token=self.token_manager.create_refresh_token(data=usuario_response)
+            )
             
+            return token_value_object
+
+       
+        

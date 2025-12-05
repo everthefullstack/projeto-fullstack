@@ -11,8 +11,6 @@ class AuthValueObject:
         if not self.login:
             raise ErroDeValueObject("Dado de login não pode ser vazio.")
         
-        return True
-        
     def validar_senha(self) -> None:
         if not self.senha:
             raise ErroDeValueObject("Senha não pode ser vazia.")

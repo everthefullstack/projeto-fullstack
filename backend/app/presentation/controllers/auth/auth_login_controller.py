@@ -4,7 +4,7 @@ from app.domain.value_objects.http_request_value_object import HttpRequestValueO
 from app.domain.value_objects.http_response_value_object import HttpResponseValueObject
 from app.domain.value_objects.auth_value_object import AuthValueObject
 from app.presentation.adapters.dataclass_adapter import DataclassAdapter
-from app.domain.erros.erros import ErroDeValueObject
+from app.domain.erros.erros import ErroDeValueObject, CredenciaisInvalidasErro
 
 
 @dataclass(slots=True, kw_only=True)
@@ -23,6 +23,9 @@ class AuthLoginController:
             
             return HttpResponseValueObject(status_code=200, body=DataclassAdapter().dataclass_to_dict(data=auth_login_response))
 
+        except CredenciaisInvalidasErro as e:
+            return HttpResponseValueObject(status_code=401, message=f"{e.args[0]}")
+        
         except ErroDeValueObject as e:
             return HttpResponseValueObject(status_code=422, message=f"{e.args[0]}")
         
